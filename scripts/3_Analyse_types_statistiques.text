@@ -1,0 +1,22 @@
+Analyse des statistiques et détection des anomalies
+Si vous observez les résultats de df.describe(), plusieurs éléments importants sautent aux yeux :
+
+L'Âge (age) :
+
+Les valeurs minimales et maximales sont exprimées en jours (par exemple, allant d'environ 10 798 à 23 713 jours).
+
+En divisant par 365.25, cela correspond à une tranche d'âge d'environ 29 ans à 65 ans, ce qui représente une population adulte active et mûre pour l'étude du risque cardiovasculaire.
+
+La Tension Artérielle (ap_hi et ap_lo) :
+
+Anomalies critiques : On remarque des valeurs aberrantes évidentes, telles que des pressions systoliques (ap_hi) négatives ou atteignant 16 020 mmHg (ce qui est physiologiquement impossible), ainsi que des pressions diastoliques (ap_lo) négatives ou excessives.
+
+Nécessité de nettoyage : Ces valeurs devront être filtrées avant l'entraînement (par exemple, en ne conservant que les pressions systoliques réalistes entre 50 et 250 mmHg et les diastoliques entre 30 et 200 mmHg).
+
+La Taille et le Poids (height et weight) :
+
+Les valeurs s'étendent sur des échelles cohérentes pour des adultes (tailles généralement entre 100 cm et 250 cm, poids entre 10 kg et 200 kg), bien qu'il conviendra de s'assurer qu'il n'y a pas d'erreurs extrêmes de saisie.
+
+Variables Binaires / Catégorielles :
+
+Les variables comme gender, smoke, alco, active et cardio prennent bien des valeurs binaires ou discrètes limitées (1/2 pour le genre, 0/1 pour le reste).

@@ -1,0 +1,18 @@
+Analyse détaillée par variable
+age_years (Âge) :
+
+La population est comprise entre 29 et 64 ans, avec une moyenne d'environ 53 ans.
+
+La distribution montre une concentration plus forte des patients dans la tranche d'âge de 50 à 60 ans, ce qui est cohérent avec l'étude des risques cardiovasculaires.
+
+height (Taille) et weight (Poids) :
+
+La taille suit une distribution quasi-gaussienne (normale) centrée autour de 165 cm.
+
+Le poids présente une légère asymétrie vers la droite (skewness positive), avec une moyenne de 74.12 kg et une médiane de 72 kg, reflétant la présence de profils en surcharge pondérale ou obèses dans l'échantillon.
+
+ap_hi & ap_lo (Tension artérielle) :
+
+La pression systolique (ap_hi) est en moyenne de 126.7 mmHg, avec un pic très net autour de 120 mmHg (norme clinique standard).
+
+La pression diastolique (ap_lo) est en moyenne de 81.3 mmHg, avec une forte concentration autour de 80 mmHg.
