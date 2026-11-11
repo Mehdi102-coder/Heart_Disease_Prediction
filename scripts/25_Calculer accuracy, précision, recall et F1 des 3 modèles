@@ -1,13 +1,13 @@
 import matplotlib.pyplot as plt
 import pandas as pd
-from sklearn.ensemble import RandomForestClassifier
+from sklearn.ensemble import GradientBoostingClassifier, RandomForestClassifier
 from sklearn.linear_model import LogisticRegression
 from sklearn.metrics import accuracy_score, f1_score, precision_score, recall_score
-from sklearn.model_selection import train_test_split
+from sklearn.model_selection import GridSearchCV, train_test_split
 from sklearn.neighbors import KNeighborsClassifier
 from sklearn.preprocessing import StandardScaler
 
-# 1. Charger le dataset avec le chemin complet (le 'r' au début évite les problèmes avec les '\')
+# 1. Charger le dataset avec le chemin complet
 chemin_fichier = r'C:\Users\AZZEDDINE\Documents\BDIA\SCRUM\p_maladie_cardiaque\p_maladie_cardiaque\cardio_data_processed.csv'
 df = pd.read_csv(chemin_fichier)
 
@@ -20,25 +20,46 @@ X_train, X_test, y_train, y_test = train_test_split(
     X, y, test_size=0.2, random_state=42
 )
 
-# 4. Normaliser les données (nécessaire pour la Régression Logistique et KNN)
+# 4. Normaliser les données
 scaler = StandardScaler()
 X_train_scaled = scaler.fit_transform(X_train)
 X_test_scaled = scaler.transform(X_test)
 
-# 5. Définir les dictionnaires de modèles
+# --- 5. OPTIMISATION DU GRADIENT BOOSTING VIA GRIDSEARCHCV ---
+print("Recherche des meilleurs hyperparamètres pour le Gradient Boosting...")
+gb_param_grid = {
+    'n_estimators': [100, 200],
+    'learning_rate': [0.01, 0.1],
+    'max_depth': [3, 5],
+}
+gb_grid = GridSearchCV(
+    GradientBoostingClassifier(random_state=42),
+    gb_param_grid,
+    cv=3,
+    scoring='accuracy',
+    n_jobs=-1,
+)
+gb_grid.fit(X_train_scaled, y_train)
+best_gb_model = gb_grid.best_estimator_
+print(f'Meilleurs paramètres trouvés : {gb_grid.best_params_}\n')
+
+# 6. Définir le dictionnaire de tous les modèles à comparer
 models = {
     'Régression Logistique': LogisticRegression(random_state=42),
     'KNN (k=5)': KNeighborsClassifier(n_neighbors=5),
     'Random Forest': RandomForestClassifier(n_estimators=100, random_state=42),
+    'Gradient Boosting': GradientBoostingClassifier(random_state=42),
+    'GB Optimisé': best_gb_model,
 }
 
 # Stockage des résultats pour l'évaluation et le graphique
 results = []
 
-# 6. Entraîner et évaluer chaque modèle
+# 7. Entraîner et évaluer chaque modèle
 for name, model in models.items():
-  # Entraînement
-  model.fit(X_train_scaled, y_train)
+  # Pour le GB optimisé, il est déjà entraîné par GridSearchCV, mais pour les autres on appelle .fit()
+  if name != 'GB Optimisé':
+    model.fit(X_train_scaled, y_train)
 
   # Prédictions
   y_pred = model.predict(X_test_scaled)
@@ -67,17 +88,19 @@ for name, model in models.items():
 # Convertir les résultats en DataFrame pandas
 results_df = pd.DataFrame(results).set_index('Modèle')
 
-# 7. Générer le diagramme comparatif avec Matplotlib
-ax = results_df.plot(kind='bar', figsize=(10, 6), colormap='Set2', width=0.8)
+# 8. Générer le diagramme comparatif avec Matplotlib
+ax = results_df.plot(
+    kind='bar', figsize=(12, 6), colormap='tab10', width=0.85
+)
 plt.title(
-    "Comparaison des performances des modèles (LogReg, KNN, Random Forest)",
+    'Comparaison globale des 5 modèles (avec Gradient Boosting & Optimisé)',
     fontsize=14,
     weight='bold',
 )
 plt.ylim(0, 1.05)
 plt.ylabel('Score', fontsize=12)
-plt.xlabel("Modèles", fontsize=12)
-plt.xticks(rotation=0)
+plt.xlabel('Modèles', fontsize=12)
+plt.xticks(rotation=15, ha='right')
 plt.legend(bbox_to_anchor=(1.05, 1), loc='upper left')
 plt.grid(axis='y', linestyle='--', alpha=0.7)
 plt.tight_layout()
