@@ -1,6 +1,0 @@
-Explications des actions de nettoyage :
-Suppression des doublons : On supprime les 24 lignes dupliquées pour éviter de sur-représenter certains profils.
-
-Filtrage de la tension (ap_hi / ap_lo) : Les pressions négatives, les zéros et les valeurs extrêmes aberrantes (ex: 16020 mmHg) sont éliminés. On s'assure aussi que ap_hi >= ap_lo.
-
-Feature Engineering (Âge) : La colonne age exprimée en jours est convertie en une colonne age_years en années, ce qui rend l'analyse et la compréhension du modèle beaucoup plus intuitives.

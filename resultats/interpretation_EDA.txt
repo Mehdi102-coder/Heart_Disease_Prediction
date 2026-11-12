@@ -1,0 +1,16 @@
+INTERPRÉTATION DE L'ANALYSE EXPLORATOIRE (EDA)
+==================================================
+1. Classes : 49.5 % de malades et 50.5 % de non-malades. Le jeu de données est équilibré, l'accuracy est donc une métrique exploitable.
+2. Variables les plus liées à la maladie : ap_hi (+0.43), ap_lo (+0.34), age_years (+0.24).
+   Variable la moins liée : gender (+0.01).
+3. Corrélation la plus forte entre variables explicatives : ap_hi / ap_lo (0.73).
+4. age_years : 0.0% de valeurs hors bornes IQR, asymétrie = -0.30.
+4. height : 0.7% de valeurs hors bornes IQR, asymétrie = -0.61.
+4. weight : 2.5% de valeurs hors bornes IQR, asymétrie = +1.01.
+4. ap_hi : 1.5% de valeurs hors bornes IQR, asymétrie = +0.93.
+4. ap_lo : 5.1% de valeurs hors bornes IQR, asymétrie = +0.36.
+5. Moyennes selon la cible (0 = sain, 1 = malade) :
+        age_years  weight  ap_hi  ap_lo
+cardio                                 
+0            51.2    71.6  119.6   78.1
+1            54.4    76.7  133.9   84.6

@@ -1,1 +1,18 @@
-models/random_forest_model.pkl
+# Python
+__pycache__/
+*.pyc
+.pytest_cache/
+
+# Environnements virtuels
+.venv/
+venv/
+env/
+
+# Modèles
+models/*.pkl
+models/*.joblib
+
+# Fichiers temporaires
+.ipynb_checkpoints/
+.vscode/
+.env

@@ -1,0 +1,4 @@
+﻿Modèle,Accuracy (%),Précision (%),Recall (%),F1 (%)
+Régression Logistique,72.75,75.99,65.88,70.57
+KNN (k=5),69.79,70.43,67.39,68.88
+Random Forest,70.78,71.08,69.27,70.16

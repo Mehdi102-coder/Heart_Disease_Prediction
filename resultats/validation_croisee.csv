@@ -1,0 +1,4 @@
+﻿Modèle,accuracy (moyenne %),accuracy (écart-type),precision (moyenne %),precision (écart-type),recall (moyenne %),recall (écart-type),f1 (moyenne %),f1 (écart-type),roc_auc (moyenne %),roc_auc (écart-type)
+Régression Logistique,72.69,0.47,75.29,0.59,66.65,0.52,70.71,0.5,79.08,0.41
+KNN (k=5),69.47,0.38,69.61,0.42,67.92,0.52,68.75,0.41,74.23,0.49
+Random Forest,70.52,0.29,70.47,0.15,69.49,0.68,69.98,0.41,76.4,0.55
